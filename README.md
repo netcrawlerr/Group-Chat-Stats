@@ -1,5 +1,4 @@
 <h1 align="center">Hi 👋, I'm MEJID</h1>
-<h3 align="center">Aspiring Programmer Learning the Ropes of Coding</h3>
 
 # 'who-talks': is a straightforward web application designed to determine the most active members in a group based on their message activity. 
  It identifies and displays a list of members who talk or send messages the most within the group.
