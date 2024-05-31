@@ -1,54 +1,78 @@
+/* eslint-disable react/prop-types */
+// // i want to place the div that show list of topchatter in the center of the screen i want it to be an orderd list and i want it to be scrollable in other words i want to apply overflow-scroll to the list of
+
 import { useEffect, useState } from "react";
 import "./App.css";
 
 function App() {
-  const [loading, setLoading] = useState(true);
+  const [view, setView] = useState("initial"); // 'initial', 'loading', 'results'
+  const [chatData, setChatData] = useState(null);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
+  const handleChatData = (data) => {
+    setChatData(data);
+    setView("loading");
+    // Simulate loading time
+    setTimeout(() => {
+      setView("results");
     }, 2000);
-    return () => clearTimeout(timer); // Clear timeout if the component is unmounted
-  }, []);
+  };
 
   return (
-    <>
-      <div className="flex bg-amber-500 quicksand w-screen ">
-        <div className=" flex  bg-amber-900 h-screen justify-center items-start p-5 text-3xl text-yellow-400 ">
-          {/* <img src="chat.svg" className="w-12 " alt="" /> */}
-          <h1>Group Chat Stats</h1>
-        </div>
-
-        <UploadData />
-        {loading ? (
-          <Loader />
-        ) : (
-          // <Loader />
-          <TopChatters setLoading={setLoading} />
-        )}
+    <div className="flex bg-amber-500 quicksand w-screen h-screen">
+      <div className="flex bg-amber-900 h-screen justify-center items-start p-5 text-3xl text-yellow-400">
+        <h1>Group Chat Stats</h1>
       </div>
-    </>
+
+      <div className="flex justify-center items-center m-auto p-4">
+        <UploadData getChatters={handleChatData} />
+        {view === "loading" && <Loader />}
+        {view === "results" && chatData && <TopChatters chatData={chatData} />}
+      </div>
+    </div>
   );
 }
 
 function Loader() {
   return (
     <div className="loader-container flex-col justify-center items-center m-auto">
-      <div className="loader "></div>
-      <p className="mt-5 items text-green-900 text-2xl"> Loading .......</p>
+      <div className="loader"></div>
+      <p className="mt-5 items text-green-900 text-2xl">Loading .......</p>
     </div>
   );
 }
 
-function UploadData() {
-  return (
-    <div className="flex justify-center items-center m-auto p-4">
-      <form action="">
-        <div className="flex m-3">
-          <span className="text-4xl m-2 text-white">Upload JSON Data</span>
-          <img src="upload.svg" className="w-12" alt="" />
-        </div>
+function UploadData({ getChatters }) {
+  const [file, setFile] = useState(null);
 
+  const handleFileChange = (event) => {
+    const selectedFile = event.target.files[0];
+    setFile(selectedFile);
+  };
+
+  const handleUpload = () => {
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const json = JSON.parse(e.target.result);
+          console.log(json);
+          // Pass the parsed JSON data to the getChatters function
+          getChatters(json);
+        } catch (error) {
+          console.error("Error parsing JSON:", error);
+        }
+      };
+      reader.readAsText(file);
+    }
+  };
+
+  return (
+    <form>
+      <div className="flex m-3">
+        <span className="text-4xl m-2 text-white">Upload JSON Data</span>
+        <img src="upload.svg" className="w-12" alt="upload icon" />
+      </div>
+      <label htmlFor="file-upload" className="file-btn">
         <a className="file-btn">
           <svg
             viewBox="0 0 256 256"
@@ -62,32 +86,40 @@ function UploadData() {
               fill="currentColor"
             ></path>
           </svg>
-          <input type="file" style={{ display: "block", marginTop: "10px" }} />
+          <input
+            id="file-upload"
+            type="file"
+            onChange={handleFileChange}
+            // If not used, remove commented style line
+            // style={{ display: "none" }}
+          />
         </a>
-        {/* Button */}
-        <a className=" fancy" href="#">
-          <span className="top-key"></span>
-          <span className="mr-7 text">Upload</span>
-          <span className="bottom-key-1"></span>
-          <span className="bottom-key-2"></span>
-        </a>
-      </form>
-    </div>
+      </label>
+      <button
+        type="button"
+        className="fancy"
+        onClick={handleUpload}
+        disabled={!file}
+      >
+        <span className="top-key"></span>
+        <span className="mr-7 text file-btn">Show Results</span>
+        <span className="bottom-key-1"></span>
+        <span className="bottom-key-2"></span>
+      </button>
+    </form>
   );
 }
 
-function TopChatters({ setLoading }) {
+function TopChatters({ chatData }) {
   const [topChitChatters, setTopChitChatters] = useState([]);
-  const [groupName, setGroupName] = useState("....");
+  const [groupName, setGroupName] = useState("No Data Found 😔");
 
-  async function getChatters() {
-    try {
-      const res = await fetch("../result.json");
-      const data = await res.json();
+  useEffect(() => {
+    if (chatData) {
+      const { name, messages } = chatData;
+      setGroupName(name);
 
-      setGroupName(data.name);
-
-      const counts = data.messages.reduce((acc, msg) => {
+      const counts = messages.reduce((acc, msg) => {
         const actor = msg.actor || msg.from;
         acc[actor] = (acc[actor] || 0) + 1;
         return acc;
@@ -98,37 +130,27 @@ function TopChatters({ setLoading }) {
         .sort((a, b) => b.value - a.value);
 
       setTopChitChatters(topChitChatters);
-    } catch (error) {
-      console.error("Failed to fetch chatters", error);
-    } finally {
-      setLoading(false);
     }
-  }
-
-  useEffect(() => {
-    getChatters();
-  }, []);
+  }, [chatData]);
 
   return (
-    <div className="top-chatters-container">
-      <h1 className="text-4xl text-white mb-6">{groupName}</h1>
-      <hr />
-      <ol className="bg-stone-300 top-chatters-list">
-        {topChitChatters.map((chatter, index) => (
-          <li className="text-2xl p-2" key={index}>
-            {chatter.key === "null"
-              ? (chatter.key = "Deleted Account")
-              : chatter.key}{" "}
-            - {chatter.value} messages
-          </li>
-        ))}
-      </ol>
+    <div className="top-chatters-container flex justify-center items-center m-auto p-4 h-3/4">
+      <div className="top-chatters-content w-full max-w-lg">
+        <h1 className="text-4xl text-white mb-6 text-center">{groupName}</h1>
+        <hr />
+        <ol className="bg-stone-300 top-chatters-list overflow-scroll h-full">
+          {topChitChatters.map((chatter, index) => (
+            <li className="text-2xl p-2" key={index}>
+              {chatter.key === "null"
+                ? (chatter.key = "Deleted Account")
+                : chatter.key}{" "}
+              - {chatter.value} messages
+            </li>
+          ))}
+        </ol>
+      </div>
     </div>
   );
 }
-/*
-now what 
-*/
-export default App;
 
-// i want to place the div that show list of topchatter in the center of the screen i want it to be an orderd list and i want it to be scrollable in other words i want to apply overflow-scroll to the list of
+export default App;
