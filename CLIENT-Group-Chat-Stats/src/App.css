@@ -114,8 +114,14 @@ a:active {
   /* width: 80%; */
 }
 
-.file-btn:hover{
-  cursor:pointer;
+.file-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1px;
+}
+.file-btn:hover {
+  cursor: pointer;
 }
 .fancy {
   background-color: transparent;
@@ -139,10 +145,9 @@ a:active {
   transition: all 0.3s ease-in-out;
   user-select: none;
   font-size: 13px;
- }
- 
+}
 
- .fancy .text {
+.fancy .text {
   font-size: 1.125em;
   line-height: 1.33333em;
   padding-left: 2em;
@@ -152,9 +157,9 @@ a:active {
   text-transform: uppercase;
   text-decoration: none;
   color: black;
- }
- 
- .fancy .top-key {
+}
+
+.fancy .top-key {
   height: 2px;
   width: 1.5625rem;
   top: -2px;
@@ -162,9 +167,9 @@ a:active {
   position: absolute;
   background: #e8e8e8;
   transition: width 0.5s ease-out, left 0.3s ease-out;
- }
- 
- .fancy .bottom-key-1 {
+}
+
+.fancy .bottom-key-1 {
   height: 2px;
   width: 1.5625rem;
   right: 1.875rem;
@@ -172,9 +177,9 @@ a:active {
   position: absolute;
   background: #e8e8e8;
   transition: width 0.5s ease-out, right 0.3s ease-out;
- }
- 
- .fancy .bottom-key-2 {
+}
+
+.fancy .bottom-key-2 {
   height: 2px;
   width: 0.625rem;
   right: 0.625rem;
@@ -182,6 +187,4 @@ a:active {
   position: absolute;
   background: #e8e8e8;
   transition: width 0.5s ease-out, right 0.3s ease-out;
- }
- 
- 
+}
