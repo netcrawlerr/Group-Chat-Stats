@@ -1,21 +1,30 @@
-<h1 align="center">Hi 👋, I'm MEJID</h1>
+# Group Chat Stats
 
-# 'who-talks': is a straightforward web application designed to determine the most active members in a group based on their message activity. 
- It identifies and displays a list of members who talk or send messages the most within the group.
+## Description
+Group Chat Stats is a web application that analyzes JSON data from group chat conversations and provides insights into the most active participants. It allows users to upload their chat data in JSON format, and then displays a list of top chatters along with the number of messages they have sent.
+
+## Features
+- Upload JSON data from group chat conversations.
+- Analyze chat data to identify top chatters.
+- Display top chatters and message counts in a scrollable list.
+- Simulate loading time to provide a seamless user experience.
+
+## Tech Stack
+- **Frontend**: React.js
+- **Styling**: CSS
+- **File Handling**: FileReader API
+- **State Management**: React Hooks (useState, useEffect)
+- **Data Analysis**: JavaScript 
+
+## Usage
+1. Clone the repository to your local machine.
+2. Navigate to the project directory.
+3. Install dependencies using `npm install`.
+4. Start the development server using `npm start`.
+5. Upload your JSON chat data using the "Upload JSON Data" section.
+6. Click the "Show Results" button to analyze the data and display the top chatters.
+
+## Contributors
+- [MEJID](https://github.com/netcrawlerr)
 
 
-# Technologies Used
-
-### HTML: The foundation for structuring the web page.
-### CSS: For styling and enhancing the user interface.
-### JavaScript: To handle the logic and interactivity of the application.
-
-
-<p align="left"> <a href="https://twitter.com/abdulmejidamk" target="blank"><img src="https://img.shields.io/twitter/follow/abdulmejidamk?logo=twitter&style=for-the-badge" alt="abdulmejidamk" /></a> </p>
-
-- 🌱 I’m currently learning **JS**
-
-<h3 align="left">Connect with me:</h3>
-<p align="left">
-<a href="https://twitter.com/abdulmejidamk" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/twitter.svg" alt="abdulmejidamk" height="30" width="40" /></a>
-</p>
