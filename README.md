@@ -20,7 +20,7 @@ Group Chat Stats is a web application that analyzes JSON data from group chat co
 1. Clone the repository to your local machine.
 2. Navigate to the project directory.
 3. Install dependencies using `npm install`.
-4. Start the development server using `npm start`.
+4. Start the development server using `npm run dev`.
 5. Upload your JSON chat data using the "Upload JSON Data" section.
 6. Click the "Show Results" button to analyze the data and display the top chatters.
 
