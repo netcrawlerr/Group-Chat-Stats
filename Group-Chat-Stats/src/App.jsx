@@ -18,17 +18,22 @@ function App() {
   };
 
   return (
-    <div className="flex bg-amber-500 quicksand w-screen h-screen">
-      <div className="flex bg-amber-900 h-screen justify-center items-start p-5 text-3xl text-yellow-400">
-        <h1>Group Chat Stats</h1>
-      </div>
+    <>
+      <div className="flex bg-amber-500 quicksand w-screen h-screen">
+        <div className="flex-col bg-amber-900 h-screen justify-center items-center p-5 text-3xl text-yellow-400">
+          <h1 className="mb-20">Group Chat Stats</h1>
+          <img src="/peopletalking.svg" alt="" />
+        </div>
 
-      <div className="flex justify-center items-center m-auto p-4">
-        <UploadData getChatters={handleChatData} />
-        {view === "loading" && <Loader />}
-        {view === "results" && chatData && <TopChatters chatData={chatData} />}
+        <div className="flex justify-center items-center m-auto p-4">
+          <UploadData getChatters={handleChatData} />
+          {view === "loading" && <Loader />}
+          {view === "results" && chatData && (
+            <TopChatters chatData={chatData} />
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
@@ -150,6 +155,23 @@ function TopChatters({ chatData }) {
         </ol>
       </div>
     </div>
+  );
+}
+
+function Footer() {
+  return (
+    <footer>
+      <p>
+        Developed by{" "}
+        <a
+          href="https://github.com/netcrawlerr"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Mejid
+        </a>{" "}
+      </p>
+    </footer>
   );
 }
 
