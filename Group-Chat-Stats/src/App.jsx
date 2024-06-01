@@ -22,7 +22,7 @@ function App() {
       <div className="flex bg-amber-500 quicksand w-screen h-screen">
         <div className="flex-col bg-amber-900 h-screen justify-center items-center p-5 text-3xl text-yellow-400">
           <h1 className="mb-20">Group Chat Stats</h1>
-          <img src="/peopletalking.svg" alt="" />
+          <img src="../public/peopletalking.svg" alt="" />
         </div>
 
         <div className="flex justify-center items-center m-auto p-4">
@@ -75,7 +75,7 @@ function UploadData({ getChatters }) {
     <form>
       <div className="flex m-3">
         <span className="text-4xl m-2 text-white">Upload JSON Data</span>
-        <img src="upload.svg" className="w-12" alt="upload icon" />
+        <img src="../public/upload.svg" className="w-12" alt="upload icon" />
       </div>
       <label htmlFor="file-upload" className="file-btn">
         <a className="file-btn">
