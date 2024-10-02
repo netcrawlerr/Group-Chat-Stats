@@ -8,52 +8,6 @@
   align-items: center;
 }
 
-.quicksand {
-  font-family: "Quicksand", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: bold;
-  font-style: normal;
-}
-
-
-
-a {
-  color: rgba(255, 255, 255, 0.692);
-  padding: 10px 15px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  text-shadow: 0 0 20px rgba(255, 255, 255, 0.397);
-  background: rgba(255, 255, 255, 0.068);
-  overflow: hidden;
-  font-size: 0.9rem;
-  font-weight: 600;
-  gap: 8px;
-  border-radius: 5px;
-  margin: 0 5px;
-  transition: 0.2s;
-  border: 1px solid transparent;
-}
-
-a:hover {
-  border-color: rgba(255, 255, 255, 0.623);
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0.144),
-    rgba(255, 255, 255, 0.247),
-    rgba(255, 255, 255, 0.39)
-  );
-  box-shadow: 0 6px rgba(255, 255, 255, 0.623);
-  transform: translateY(-6px);
-}
-
-a:active {
-  transform: translateY(2px);
-  box-shadow: none;
-}
-
-/* Loader */
-
 .loader {
   width: 45px;
   height: 40px;
@@ -87,44 +41,6 @@ a:active {
   }
 }
 
-/* Loader container */
-.loader-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-/* Center TopChatters component */
-.top-chatters-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  /* max-height: 80vh; */
-  width: 100%;
-}
-
-.top-chatters-list {
-  max-height: 60vh;
-  overflow-y: auto;
-  padding: 0;
-  margin: 0;
-  list-style: decimal inside;
-  text-align: left;
-  /* width: 80%; */
-}
-
-.file-btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 1px;
-}
-.file-btn:hover {
-  cursor: pointer;
-}
 .fancy {
   background-color: transparent;
   border: 2px solid #000;
@@ -133,7 +49,6 @@ a:active {
   color: #fff;
   cursor: pointer;
   display: inline-block;
-  /* float: right; */
   font-weight: 700;
   letter-spacing: 0.05em;
   margin-top: 25px;

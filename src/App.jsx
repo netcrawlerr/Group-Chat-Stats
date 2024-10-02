@@ -1,17 +1,14 @@
-/* eslint-disable react/prop-types */
-// // i want to place the div that show list of topchatter in the center of the screen i want it to be an orderd list and i want it to be scrollable in other words i want to apply overflow-scroll to the list of
-
 import { useEffect, useState } from "react";
+import Loader from "./Loader";
 import "./App.css";
 
-function App() {
+const App = () => {
   const [view, setView] = useState("initial"); // 'initial', 'loading', 'results'
   const [chatData, setChatData] = useState(null);
 
   const handleChatData = (data) => {
     setChatData(data);
     setView("loading");
-    // Simulate loading time
     setTimeout(() => {
       setView("results");
     }, 2000);
@@ -35,18 +32,9 @@ function App() {
       </div>
     </>
   );
-}
+};
 
-function Loader() {
-  return (
-    <div className="loader-container flex-col justify-center items-center m-auto">
-      <div className="loader"></div>
-      <p className="mt-5 items text-green-900 text-2xl">Loading .......</p>
-    </div>
-  );
-}
-
-function UploadData({ getChatters }) {
+const UploadData = ({ getChatters }) => {
   const [file, setFile] = useState(null);
 
   const handleFileChange = (event) => {
@@ -60,8 +48,6 @@ function UploadData({ getChatters }) {
       reader.onload = (e) => {
         try {
           const json = JSON.parse(e.target.result);
-          console.log(json);
-          // Pass the parsed JSON data to the getChatters function
           getChatters(json);
         } catch (error) {
           console.error("Error parsing JSON:", error);
@@ -77,8 +63,11 @@ function UploadData({ getChatters }) {
         <span className="text-4xl m-2 text-white">Upload JSON Data</span>
         <img src="upload.svg" className="w-12" alt="upload icon" />
       </div>
-      <label htmlFor="file-upload" className="file-btn">
-        <a className="file-btn">
+      <label
+        htmlFor="file-upload"
+        className="flex justify-center items-center m-[1px]"
+      >
+        <a className="flex justify-center items-center m-[1px]">
           <svg
             viewBox="0 0 256 256"
             height="32"
@@ -91,13 +80,7 @@ function UploadData({ getChatters }) {
               fill="currentColor"
             ></path>
           </svg>
-          <input
-            id="file-upload"
-            type="file"
-            onChange={handleFileChange}
-            // If not used, remove commented style line
-            // style={{ display: "none" }}
-          />
+          <input id="file-upload" type="file" onChange={handleFileChange} />
         </a>
       </label>
       <button
@@ -107,13 +90,15 @@ function UploadData({ getChatters }) {
         disabled={!file}
       >
         <span className="top-key"></span>
-        <span className="mr-7 text file-btn">Show Results</span>
+        <span className="mr-7 text flex justify-center items-center hover:cursor-pointer m-[1px]">
+          Show Results
+        </span>
         <span className="bottom-key-1"></span>
         <span className="bottom-key-2"></span>
       </button>
     </form>
   );
-}
+};
 
 function TopChatters({ chatData }) {
   const [topChitChatters, setTopChitChatters] = useState([]);
@@ -139,11 +124,11 @@ function TopChatters({ chatData }) {
   }, [chatData]);
 
   return (
-    <div className="top-chatters-container flex justify-center items-center m-auto p-4 h-3/4">
+    <div className="flex flex-col justify-center items-center w-100 m-auto p-4 h-3/4">
       <div className="top-chatters-content w-full max-w-lg">
         <h1 className="text-4xl text-white mb-6 text-center">{groupName}</h1>
         <hr />
-        <ol className="bg-stone-300 top-chatters-list overflow-scroll h-full">
+        <ol className="bg-stone-300 max-h-[60vh] overflow-y-auto p-0 m-0 list-decimal text-left overflow-scroll h-full">
           {topChitChatters.map((chatter, index) => (
             <li className="text-2xl p-2" key={index}>
               {chatter.key === "null"
@@ -155,23 +140,6 @@ function TopChatters({ chatData }) {
         </ol>
       </div>
     </div>
-  );
-}
-
-function Footer() {
-  return (
-    <footer>
-      <p>
-        Developed by{" "}
-        <a
-          href="https://github.com/netcrawlerr"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Mejid
-        </a>{" "}
-      </p>
-    </footer>
   );
 }
 
